@@ -11,15 +11,13 @@ export default function HomePage({ posts }) {
     // Get the client's fingerprint id
     const fingerprint = client.getFingerprint();
 
-    const LSFPS = localStorage.getItem('FINGER_PRINTS');
+    const LSFPS = localStorage.getItem('fingerprints_array');
+    console.log('🚀 ~ file: index.js:15 ~ useEffect ~ LSFPS:', LSFPS);
     const FINGER_PRINTS = LSFPS ? JSON.parse(LSFPS) : [];
-    console.log(
-      '🚀 ~ file: index.js:16 ~ useEffect ~ FINGER_PRINTS:',
-      FINGER_PRINTS
-    );
 
     if (!FINGER_PRINTS.includes(fingerprint)) {
       FINGER_PRINTS.push(fingerprint);
+      localStorage.setItem('fingerprints_array', JSON.stringify(FINGER_PRINTS));
     }
     setLocalStorageFPs(FINGER_PRINTS);
     setCurrentFP(fingerprint);
